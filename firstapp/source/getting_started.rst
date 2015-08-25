@@ -5,8 +5,8 @@ Getting started
 Who should read this guide
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This guide is for experienced software developers who want to deploy
-applications to OpenStack clouds.
+This guide is for software developers who want to deploy applications to
+DreamCompute, which is based on OpenStack.
 
 If you are familiar with OpenStack but have not created a cloud
 application in general or an OpenStack application in particular, this
@@ -108,11 +108,12 @@ information, contact
 What you need
 -------------
 
-We assume that you can already access an OpenStack cloud. You must have a
-project, also known as a tenant, with a minimum quota of six instances.
-Because the Fractals application runs in Ubuntu, Debian, Fedora-based, and
-openSUSE-based distributions, you must create instances that use one of these
-operating systems.
+We assume that you already have access to DreamCompute. If so, you
+have been assigned a project, sometimes called a tenant, which has a
+maximum quota and for our purposes you will need to be able to create
+at least six instances. Because the Fractals application runs in Ubuntu,
+Debian, Fedora-based, and openSUSE-based distributions, you must create
+instances that use one of these operating systems.
 
 To interact with the cloud, you must also have
 
@@ -181,7 +182,9 @@ To interact with the cloud, you must also have
 
      .. note:: Before proceeding, install the latest version of shade.
 
-Obtain the following information from your cloud provider:
+Download the DreamCompute RC file from
+https://dashboard.dreamcompute.com/project/access_and_security/api_access/openrc/
+to obtain the following information.
 
 * auth URL
 * user name
@@ -189,27 +192,18 @@ Obtain the following information from your cloud provider:
 * project ID or name (projects are also known as tenants)
 * cloud region
 
-You can also download the OpenStack RC file from the OpenStack Horizon
-dashboard. Log in to the dashboard and click :guilabel:`Project->Access &
-Security->API Access->Download OpenStack RC file`. If you use this method, be
-aware that the "auth URL" does not include the path. For example, if your
-:file:`openrc.sh` file shows:
-
-.. code-block:: bash
-
-        export OS_AUTH_URL=http://controller:5000/v2.0
-
-The actual auth URL is:
+Be aware that the "auth URL" does not include the path. Your auth URL
+should look like this.
 
 .. code-block:: python
 
-        http://controller:5000
+        https://keystone.dream.io/
 
-How you interact with OpenStack
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+How you'll interact with DreamCompute
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In this tutorial, you interact with your OpenStack cloud through the SDK that
-you chose in "Choose your OpenStack SDK." This guide assumes that you know how
+In this tutorial, you interact with DreamCompute through the SDK that you
+chose in "Choose your OpenStack SDK." This guide assumes that you know how
 to run code snippets in your language of choice.
 
 .. only:: fog
@@ -338,8 +332,15 @@ To list the images that are available in your cloud, run some API calls:
 
     .. code-block:: python
 
-        <NodeImage: id=2cccbea0-cea9-4f86-a3ed-065c652adda5, name=ubuntu-14.04, driver=OpenStack  ...>
-        <NodeImage: id=f2a8dadc-7c7b-498f-996a-b5272c715e55, name=cirros-0.3.3-x86_64, driver=OpenStack  ...>
+        <NodeImage: id=e81771c0-2944-405c-ba92-3deb0e1b4ce3, name=CentOS-7.0, driver=OpenStack  ...>
+        <NodeImage: id=90d5e049-aaed-4abc-aa75-60c2b1ed6516, name=Ubuntu-14.04, driver=OpenStack  ...>
+        <NodeImage: id=f044ae8f-e0e1-4fb4-baff-0363c19a6638, name=CoreOS, driver=OpenStack  ...>
+        <NodeImage: id=2827d7cc-8cbb-4ce9-9b61-dadc2436144e, name=Fedora-20, driver=OpenStack  ...>
+        <NodeImage: id=42a0101d-31c1-4c09-a70d-8f75f887ee27, name=Fedora-21, driver=OpenStack  ...>
+        <NodeImage: id=683e165f-96b1-4ee5-8747-d15aade0dbff, name=CentOS-6.6, driver=OpenStack  ...>
+        <NodeImage: id=de4d521b-6630-4361-8b9a-b2fa640cdfa0, name=CentOS-6.5, driver=OpenStack  ...>
+        <NodeImage: id=5011c04a-f760-4dc5-9772-7e30d98647e6, name=Ubuntu-12.04-Precise, driver=OpenStack  ...>
+        <NodeImage: id=b4efbc2a-6130-4f2e-b436-55a618c4de20, name=Debian-7.0-Wheezy, driver=OpenStack  ...>
 
 .. only:: pkgcloud
 
@@ -445,11 +446,14 @@ You can also get information about available flavors:
 
     .. code-block:: python
 
-        <OpenStackNodeSize: id=1, name=m1.tiny, ram=512, disk=1, bandwidth=None, price=0.0, driver=OpenStack, vcpus=1,  ...>
-        <OpenStackNodeSize: id=2, name=m1.small, ram=2048, disk=20, bandwidth=None, price=0.0, driver=OpenStack, vcpus=1,  ...>
-        <OpenStackNodeSize: id=3, name=m1.medium, ram=4096, disk=40, bandwidth=None, price=0.0, driver=OpenStack, vcpus=2,  ...>
-        <OpenStackNodeSize: id=4, name=m1.large, ram=8192, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=4,  ...>
-        <OpenStackNodeSize: id=5, name=m1.xlarge, ram=16384, disk=160, bandwidth=None, price=0.0, driver=OpenStack, vcpus=8,  ...>
+        <OpenStackNodeSize: id=100, name=subsonic, ram=1024, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=1,  ...>
+        <OpenStackNodeSize: id=200, name=supersonic, ram=2048, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=1,  ...>
+        <OpenStackNodeSize: id=300, name=lightspeed, ram=4096, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=2,  ...>
+        <OpenStackNodeSize: id=400, name=warpspeed, ram=8192, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=4,  ...>
+        <OpenStackNodeSize: id=500, name=hyperspeed, ram=16384, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=8,  ...>
+        <OpenStackNodeSize: id=600, name=ridiculous, ram=32768, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=16,  ...>
+        <OpenStackNodeSize: id=700, name=ludicrous, ram=65536, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=32,  ...>
+        <OpenStackNodeSize: id=800, name=plaid, ram=131072, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=64,  ...>
 
 .. only:: pkgcloud
 
@@ -582,7 +586,7 @@ image that you picked in the previous section:
 
     .. code-block:: python
 
-         <NodeImage: id=2cccbea0-cea9-4f86-a3ed-065c652adda5, name=ubuntu-14.04, driver=OpenStack  ...>
+        <NodeImage: id=90d5e049-aaed-4abc-aa75-60c2b1ed6516, name=Ubuntu-14.04, driver=OpenStack  ...>
 
 .. only:: pkgcloud
 
@@ -675,7 +679,7 @@ Next, tell the script which flavor you want to use:
 
     .. code-block:: python
 
-        <OpenStackNodeSize: id=2, name=m1.small, ram=2048, disk=20, bandwidth=None, price=0.0, driver=OpenStack, vcpus=1,  ...>
+        <OpenStackNodeSize: id=100, name=subsonic, ram=1024, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=1,  ...>
 
 .. only:: pkgcloud
 
@@ -790,7 +794,7 @@ Create the instance.
 
     .. code-block:: python
 
-       <Node: uuid=1242d56cac5bcd4c110c60d57ccdbff086515133, name=testing, state=PENDING, public_ips=[], private_ips=[], provider=OpenStack ...>
+        <Node: uuid=3c8fd6fc02916c26d75b5e9bfa53d8b1315671be, name=testing, state=PENDING, public_ips=[], private_ips=[], provider=OpenStack ...>
 
 .. only:: openstacksdk
 
@@ -884,7 +888,7 @@ The new instance appears.
 
     .. code-block:: python
 
-       <Node: uuid=1242d56cac5bcd4c110c60d57ccdbff086515133, name=testing, state=RUNNING, public_ips=[], private_ips=[], provider=OpenStack ...>
+        <Node: uuid=3c8fd6fc02916c26d75b5e9bfa53d8b1315671be, name=testing, state=RUNNING, public_ips=[], private_ips=[], provider=OpenStack ...>
 
 .. only:: openstacksdk
 
@@ -1101,9 +1105,10 @@ your public SSH key file.
 
         openstack.compute.v2.keypair.Keypair(attrs={u'public_key': u'ssh-rsa ABAAABAQCyyzkyaPf.....', u'name': u'demokey', u'fingerprint': aa:bb:cc:... '}, loaded=True)
 
-* Network access. By default, OpenStack filters all traffic. You must create
-  a security group and apply it to your instance. The security group allows HTTP
-  and SSH access. We will go into more detail in :doc:`/introduction`.
+* Network access. DreamCompute has a default security group that will
+  work for our purposes. If you want, you can create another security
+  group by following along below. This security group allows HTTP
+  and SSH access. We'll go into more detail in :doc:`/introduction`.
 
 .. only:: fog
 

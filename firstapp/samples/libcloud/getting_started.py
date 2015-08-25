@@ -27,12 +27,12 @@ for flavor in flavors:
     print(flavor)
 
 # step-4
-image_id = '2cccbea0-cea9-4f86-a3ed-065c652adda5'
+image_id = '90d5e049-aaed-4abc-aa75-60c2b1ed6516'
 image = conn.get_image(image_id)
 print(image)
 
 # step-5
-flavor_id = '2'
+flavor_id = '100'
 flavor = conn.ex_get_size(flavor_id)
 print(flavor)
 
