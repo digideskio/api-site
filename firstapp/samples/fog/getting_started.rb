@@ -3,9 +3,9 @@ require 'fog'
 
 auth_username = 'your_auth_username'
 auth_password = 'your_auth_password'
-auth_url = 'http://controller:5000'
 project_name = 'your_project_name_or_id'
-region_name = 'your_region_name'
+auth_url = 'https://keystone.dream.io'
+region_name = 'RegionOne'
 
 conn = Fog::Compute.new({
     :provider            => 'openstack',
@@ -24,12 +24,12 @@ flavors = conn.flavors.all
 print flavors
 
 # step-4
-image_id = '2cccbea0-cea9-4f86-a3ed-065c652adda5'
+image_id = '90d5e049-aaed-4abc-aa75-60c2b1ed6516'
 image = conn.images.get image_id
 print image
 
 # step-5
-flavor_id = '3'
+flavor_id = '100'
 flavor = conn.flavors.get flavor_id
 print flavor
 

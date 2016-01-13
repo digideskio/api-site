@@ -122,7 +122,8 @@ To see if the volume creation was successful, list all volumes:
         :start-after: step-3
         :end-before: step-4
 
-Attach the storage volume to a running instance.
+Now that you have created a storage volume, let's attach it to an
+already running instance.
 
 Use Block Storage for the Fractal database server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -148,8 +149,8 @@ MySQL, port 3306) from the network:
         :start-after: step-4
         :end-before: step-5
 
-Create a volume object by using the unique identifier (UUID) for the
-volume. Then, use the server object from the previous code snippet to
+Using the unique identifier (UUID) for the volume, make a new volume
+object, then use the server object from the previous snippet and
 attach the volume to it at :code:`/dev/vdb`:
 
 .. only:: libcloud
@@ -166,7 +167,7 @@ attach the volume to it at :code:`/dev/vdb`:
         :start-after: step-5
         :end-before: step-6
 
-Log in to the server to run the following steps.
+Log in to the server to be able to run the following steps.
 
 .. note:: Replace :code:`IP_SERVICES` with the IP address of the
           services instance and USERNAME to the appropriate user name.
@@ -244,7 +245,8 @@ To detach and delete a volume:
 
 .. only:: libcloud
 
-    Other features, such as creating volume snapshots, are useful for backups:
+    There are also many other useful features, such as the ability to
+    create snapshots of volumes (handy for backups):
 
     .. literalinclude:: ../samples/libcloud/block_storage.py
         :language: python
@@ -254,56 +256,6 @@ To detach and delete a volume:
     .. todo:: Do we need a note here to mention that 'test' is the
               volume name and not the volume object?
 
-    For information about these and other calls, see
-    `libcloud documentation <http://ci.apache.org/projects/libcloud/docs/compute/drivers/openstack.html>`_.
-
-Work with the OpenStack Database service
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Previously, you manually created the database, which is useful for a a single
-database that you rarely update. However, the OpenStack :code:`trove`
-component provides Database as a Service (DBaaS).
-
-.. note:: This OpenStack Database service is not installed in many
-          clouds right now, but if your cloud supports it, it can
-          make your life a lot easier when working with databases.
-
-SDKs do not generally support the service yet, but you can use the
-'trove' command-line client to work with it instead.
-
-To install the 'trove' command-line client, see
-`Install the OpenStack command-line clients <http://docs.openstack.org/cli-reference/content/install_clients.html>`_.
-
-To set up environment variables for your cloud in an :file:`openrc.sh`
-file, see
-`Set environment variables using the OpenStack RC file <http://docs.openstack.org/cli-reference/content/cli_openrc.html>`_.
-
-Ensure you have an :file:`openrc.sh` file, source it, and validate that
-your trove client works: ::
-
-    $ cat openrc.sh
-    export OS_USERNAME=your_auth_username
-    export OS_PASSWORD=your_auth_password
-    export OS_TENANT_NAME=your_project_name
-    export OS_AUTH_URL=http://controller:5000/v2.0
-    export OS_REGION_NAME=your_region_name
-
-    $ source openrc.sh
-
-    $ trove --version
-    1.0.9
-
-For information about supported features and how to work with an
-existing database service installation, see
-`Database as a Service in OpenStack <http://www.slideshare.net/hastexo/hands-on-trove-database-as-a-service-in-openstack-33588994>`_.
-
-Next steps
-~~~~~~~~~~
-
-You should now be fairly confident working with Block Storage volumes.
-For information about other calls, see the volume documentation for
-your SDK. Or, try one of these tutorial steps:
-
-* :doc:`/orchestration`: Automatically orchestrate your application.
-* :doc:`/networking`: Learn about complex networking.
-* :doc:`/advice`: Get advice about operations.
+    You can find information about these calls and more in the
+    `libcloud documentation
+    <http://ci.apache.org/projects/libcloud/docs/compute/drivers/openstack.html>`_.

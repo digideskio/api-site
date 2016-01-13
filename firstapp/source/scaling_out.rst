@@ -161,6 +161,13 @@ cloud are no longer working, remove them and re-create something new.
         :start-after: step-1
         :end-before: step-2
 
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/scaling_out.py
+        :language: python
+        :start-after: step-1
+        :end-before: step-2
+
 .. only:: libcloud
 
     .. literalinclude:: ../samples/libcloud/scaling_out.py
@@ -194,6 +201,13 @@ groups.
         :start-after: step-2
         :end-before: step-3
 
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/scaling_out.py
+        :language: python
+        :start-after: step-2
+        :end-before: step-3
+
 .. only:: libcloud
 
     .. literalinclude:: ../samples/libcloud/scaling_out.py
@@ -223,6 +237,13 @@ floating IP quota too quickly.
 
     .. literalinclude:: ../samples/fog/scaling_out.rb
         :language: ruby
+        :start-after: step-3
+        :end-before: step-4
+
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/scaling_out.py
+        :language: python
         :start-after: step-3
         :end-before: step-4
 
@@ -259,6 +280,13 @@ fractals and to coordinate the communication between the services.
         :start-after: step-4
         :end-before: step-5
 
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/scaling_out.py
+        :language: python
+        :start-after: step-4
+        :end-before: step-5
+
 .. only:: libcloud
 
     .. literalinclude:: ../samples/libcloud/scaling_out.py
@@ -287,6 +315,8 @@ multiple API services:
 
     .. literalinclude:: ../samples/shade/scaling_out.py
         :language: python
+        :start-after: step-5
+        :end-before: step-6
 
 .. only:: fog
 
@@ -338,6 +368,13 @@ To increase the overall capacity, add three workers:
 
     .. literalinclude:: ../samples/fog/scaling_out.rb
         :language: ruby
+        :start-after: step-6
+        :end-before: step-7
+
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/scaling_out.py
+        :language: python
         :start-after: step-6
         :end-before: step-7
 
@@ -508,6 +545,11 @@ authentication information, the flavor ID, and image ID.
 
     .. literalinclude:: ../samples/fog/scaling_out.rb
        :language: ruby
+
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/scaling_out.py
+       :language: python
 
 .. only:: shade
 
