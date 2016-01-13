@@ -4,9 +4,10 @@ from libcloud.compute.providers import get_driver
 
 auth_username = 'your_auth_username'
 auth_password = 'your_auth_password'
-auth_url = 'http://controller:5000'
 project_name = 'your_project_name_or_id'
-region_name = 'your_region_name'
+
+auth_url = 'https://keystone.dream.io/'
+region_name = 'RegionOne'
 
 provider = get_driver(Provider.OPENSTACK)
 conn = provider(auth_username,
@@ -119,7 +120,7 @@ for instance in conn.list_nodes():
 print('Checking for unused Floating IP...')
 unused_floating_ip = None
 for floating_ip in conn.ex_list_floating_ips():
-    if floating_ip.node_id:
+    if not floating_ip.node_id:
         unused_floating_ip = floating_ip
         break
 

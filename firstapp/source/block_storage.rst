@@ -91,6 +91,12 @@ As always, connect to the API endpoint:
                               ex_tenant_name=project_name,
                               ex_force_service_region=region_name)
 
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/block_storage.py
+        :language: python
+        :start-after: step-1
+        :end-before: step-2
 
 To try it out, make a 1GB volume called :test'.
 
@@ -104,6 +110,13 @@ To try it out, make a 1GB volume called :test'.
     ::
 
         <StorageVolume id=755ab026-b5f2-4f53-b34a-6d082fb36689 size=1 driver=OpenStack>
+
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/block_storage.py
+        :language: python
+        :start-after: step-2
+        :end-before: step-3
 
 .. note:: The parameter :code:`size` is in GigaBytes.
 
@@ -119,6 +132,13 @@ List all volumes to see if it was successful:
     ::
 
         [<StorageVolume id=755ab026-b5f2-4f53-b34a-6d082fb36689 size=1 driver=OpenStack>]
+
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/block_storage.py
+        :language: python
+        :start-after: step-3
+        :end-before: step-4
 
 Now that you have created a storage volume, let's attach it to an
 already running instance.
@@ -145,6 +165,13 @@ We will also need a new security group to allow access to the database server
                                          ex_keyname=keypair_name,
                                          ex_security_groups=[db_group])
 
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/block_storage.py
+        :language: python
+        :start-after: step-4
+        :end-before: step-5
+
 Using the unique identifier (UUID) for the volume, make a new volume
 object, then use the server object from the previous snippet and
 attach the volume to it at :code:`/dev/vdb`:
@@ -155,6 +182,13 @@ attach the volume to it at :code:`/dev/vdb`:
 
         volume = connection.ex_get_volume('755ab026-b5f2-4f53-b34a-6d082fb36689')
         connection.attach_volume(instance, volume, '/dev/vdb')
+
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/block_storage.py
+        :language: python
+        :start-after: step-5
+        :end-before: step-6
 
 Log in to the server to be able to run the following steps.
 
@@ -226,18 +260,25 @@ To detach and destroy a volume:
 
         connection.destroy_volume(volume)
 
-.. note:: :code:`detach_volume` and :code:`destroy_volume` take a
-          volume object, not a name.
+    .. note:: :code:`detach_volume` and :code:`destroy_volume` take a
+              volume object, not a name.
 
-There are also many other useful features, such as the ability to
-create snapshots of volumes (handy for backups):
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/block_storage.py
+        :language: python
+        :start-after: step-6
+        :end-before: step-7
 
 .. only:: libcloud
 
+    There are also many other useful features, such as the ability to
+    create snapshots of volumes (handy for backups):
+
     .. code-block:: python
 
-*      snapshot_name = 'test_backup_1'
-        connnection.create_volume_snapshot('test', name='test backup 1')
+        snapshot_name = 'test_backup_1'
+        connection.create_volume_snapshot('test', name='test backup 1')
 
     .. todo:: Do we need a note here to mention that 'test' is the
               volume name and not the volume object?
@@ -245,61 +286,3 @@ create snapshots of volumes (handy for backups):
     You can find information about these calls and more in the
     `libcloud documentation
     <http://ci.apache.org/projects/libcloud/docs/compute/drivers/openstack.html>`_.
-
-
-Working with the OpenStack Database service
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-You created the database manually above, which is fine for a case with
-a single database you won't touch often like this. However, OpenStack
-also has a component code-named :code:`trove` that provides Database
-as a Service (DBaaS).
-
-.. note:: This OpenStack Database service is not installed in many
-          clouds right now, but if your cloud does support it, it can
-          make your life a lot easier when working with databases.
-
-SDKs don't generally support the service yet, but you can use the
-'trove' commandline client to work with it instead.
-
-Install the trove commandline client by following this guide:
-http://docs.openstack.org/cli-reference/content/install_clients.html
-
-Then set up the necessary variables for your cloud in an :file:`openrc.sh` file
-using this guide:
-http://docs.openstack.org/cli-reference/content/cli_openrc.html
-
-Ensure you have an :file:`openrc.sh` file, source it and then check
-your trove client works: ::
-
-    $ cat openrc.sh
-    export OS_USERNAME=your_auth_username
-    export OS_PASSWORD=your_auth_password
-    export OS_TENANT_NAME=your_project_name
-    export OS_AUTH_URL=http://controller:5000/v2.0
-    export OS_REGION_NAME=your_region_name
-
-    $ source openrc.sh
-
-    $ trove --version
-    1.0.9
-
-From there, you can find a good resource on what is supported and how
-to use in `these slides
-<http://www.slideshare.net/hastexo/hands-on-trove-database-as-a-service-in-openstack-33588994>`_. Steps
-to work with an existing database service installation start on
-slide 28.
-
-
-
-Next Steps
-~~~~~~~~~~
-
-You should now be fairly confident working with Block Storage volumes.
-There are several calls we did not cover. To see these and more, refer
-to the volume documentation of your SDK, or try a different step in
-the tutorial, including:
-
-* :doc:`/orchestration`: to automatically orchestrate the application
-* :doc:`/networking`: to learn about more complex networking
-* :doc:`/advice`: for advice for developers new to operations

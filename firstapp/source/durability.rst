@@ -11,9 +11,8 @@ Making it durable
 .. todo:: Large object support in Swift
           http://docs.openstack.org/developer/swift/overview_large_objects.html
 
-This section introduces object storage.  `OpenStack Object Storage
-<http://www.openstack.org/software/openstack-storage/>`_ (code-named
-swift) is open source software for creating redundant, scalable data
+This section introduces object storage.  DreamObjects uses softare
+called Ceph. Ceph is open source software for creating redundant, scalable data
 storage using clusters of standardized servers to store petabytes of
 accessible data.  It is a long-term storage system for large amounts
 of static data that can be retrieved, leveraged, and updated. Access
@@ -35,10 +34,8 @@ If you think about how you traditionally make what you store durable,
 very quickly you should come to the conclusion that keeping multiple
 copies of your objects on separate systems is a good way to do
 that. However, keeping track of multiple copies of objects is a pain,
-and building that into an app requires a lot of logic. OpenStack
-Object Storage does this automatically for you behind-the-scenes -
-replicating each object at least twice before returning 'write
-success' to your API call. It will always work to ensure that there
+and building that into an app requires a lot of logic. Ceph
+does this automatically for you behind-the-scenes. It will always work to ensure that there
 are three copies of your objects (by default) at all times -
 replicating them around the system in case of hardware failure,
 maintenance, network outage or any other kind of breakage. This is
@@ -56,8 +53,7 @@ a number of reasons.
 
 Because the local filesystem is ephemeral storage, if the instance is
 terminated, the fractal images will be lost along with the
-instance. Block based storage, which we'll discuss in
-:doc:`/block_storage`, avoids that problem, but like local filesystems, it
+instance. Block based storage avoids that problem, but like local filesystems, it
 requires administration to ensure that it does not fill up, and
 immediate attention if disks fail.
 
@@ -71,6 +67,20 @@ copies of each object and returning one of them on demand using the
 API.
 
 First, let's learn how to connect to the Object Storage endpoint:
+
+.. only:: shade
+
+    First you must install cloudfiles:
+
+    .. code-block:: shell
+
+        $ pip install python-cloudfiles
+
+    Then you can authenticate to DreamObjects
+
+    .. literalinclude:: ../samples/shade/durability.py
+        :start-after: step-1
+        :end-before: step-2
 
 .. only:: dotnet
 
@@ -121,7 +131,13 @@ First, let's learn how to connect to the Object Storage endpoint:
 
 
 To begin to store objects, we must first make a container.
-Call yours :code:`fractals`:
+We will generate a random name for it, because it must be unique:
+
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/durability.py
+        :start-after: step-2
+        :end-before: step-3
 
 .. only:: libcloud
 
@@ -138,6 +154,12 @@ Call yours :code:`fractals`:
 You should now be able to see this container appear in a listing of
 all containers in your account:
 
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/durability.py
+        :start-after: step-3
+        :end-before: step-4
+
 .. only:: libcloud
 
     .. literalinclude:: ../samples/libcloud/durability.py
@@ -151,8 +173,18 @@ all containers in your account:
         [<Container: name=fractals, provider=OpenStack Swift>]
 
 The next logical step is to upload an object. Find a photo of a goat
-online, name it :code:`goat.jpg` and upload it to your container
-:code:`fractals`:
+online, name it :code:`goat.jpg` and upload it to your container.
+You can do that with the following code:
+
+.. code-block:: shell
+
+    $ wget https://upload.wikimedia.org/wikipedia/commons/b/b2/Hausziege_04.jpg -O goat.jpg
+
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/durability.py
+        :start-after: step-4
+        :end-before: step-5
 
 .. only:: libcloud
 
@@ -160,9 +192,27 @@ online, name it :code:`goat.jpg` and upload it to your container
         :start-after: step-4
         :end-before: step-5
 
-List objects in your container :code:`fractals` to see if the upload
+List objects in your container to see if the upload
 was successful, then download the file to verify the md5sum is the
 same:
+
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/durability.py
+        :start-after: step-5
+        :end-before: step-6
+
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/durability.py
+        :start-after: step-6
+        :end-before: step-7
+
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/durability.py
+        :start-after: step-7
+        :end-before: step-8
 
 .. only:: libcloud
 
@@ -195,6 +245,18 @@ same:
 
 Finally, let's clean up by deleting our test object:
 
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/durability.py
+        :start-after: step-8
+        :end-before: step-9
+
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/durability.py
+        :start-after: step-9
+        :end-before: step-10
+
 .. only:: libcloud
 
     .. literalinclude:: ../samples/libcloud/durability.py
@@ -220,7 +282,13 @@ So let's now use the knowledge from above to backup the images of the
 Fractals app, stored inside the database right now, on the Object
 Storage.
 
-Use the :code:`fractals`' container from above to put the images in:
+Use the container from above to put the images in:
+
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/durability.py
+        :start-after: step-10
+        :end-before: step-11
 
 .. only:: libcloud
 
@@ -230,6 +298,12 @@ Use the :code:`fractals`' container from above to put the images in:
 
 Next, we backup all of our existing fractals from the database to our
 swift container. A simple for loop takes care of that:
+
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/durability.py
+        :start-after: step-11
+        :end-before: step-12
 
 .. only:: libcloud
 
@@ -247,14 +321,6 @@ swift container. A simple for loop takes care of that:
 
     .. note:: The example code uses the awesome `Requests library <http://docs.python-requests.org/en/latest/>`_. Ensure that it is installed on your system before trying to run the script above.
 
-
-Configure the Fractals app to use Object Storage
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. warning:: Currently it is not possible to directly store generated
-             images on the OpenStack Object Storage. Please revisit
-             this section again in the future.
-
 Extra features
 --------------
 
@@ -264,6 +330,12 @@ Delete containers
 One call we didn't cover above that you probably need to know is how
 to delete a container.  Ensure that you have removed all objects from
 the container before running this, otherwise it will fail:
+
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/durability.py
+        :start-after: step-12
+        :end-before: step-13
 
 .. only:: libcloud
 
@@ -284,6 +356,12 @@ they come, compared to loading the entire file in memory and then sending it.
 This is more efficient, especially for larger files.
 
 
+.. only:: shade
+
+    .. literalinclude:: ../samples/shade/durability.py
+        :start-after: step-13
+        :end-before: step-14
+
 .. only:: libcloud
 
     .. literalinclude:: ../samples/libcloud/durability.py
@@ -292,13 +370,13 @@ This is more efficient, especially for larger files.
 
 .. todo:: It would be nice to have a pointer here to section 9.
 
-Large objects
-~~~~~~~~~~~~~
-
-For efficiency, most Object Storage installations treat large objects
-(say, :code:`> 5GB`) differently than smaller objects.
-
 .. only:: libcloud
+
+    Large objects
+    ~~~~~~~~~~~~~
+
+    For efficiency, most Object Storage installations treat large objects
+    (say, :code:`> 5GB`) differently than smaller objects.
 
     If you are working with large objects, use the
     :code:`ex_multipart_upload_object` call instead of the simpler
@@ -312,21 +390,3 @@ For efficiency, most Object Storage installations treat large objects
         :start-after: step-14
         :end-before: step-15
 
-
-Next steps
-----------
-
-You should now be fairly confident working with Object Storage.
-You can find more about the Object Storage SDK calls at:
-
-.. only:: libcloud
-
-    https://libcloud.readthedocs.org/en/latest/storage/api.html
-
-Or try a different step in the tutorial, including:
-
-* :doc:`/block_storage`: to migrate the database to block storage, or use
-  the database-as-as-service component
-* :doc:`/orchestration`: to automatically orchestrate the application
-* :doc:`/networking`: to learn about more complex networking
-* :doc:`/advice`: for advice for developers new to operations
