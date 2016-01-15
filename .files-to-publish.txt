@@ -1,0 +1,2 @@
+firstapp/source/getting_started.rst
+firstapp/source/deploying_an_application.rst

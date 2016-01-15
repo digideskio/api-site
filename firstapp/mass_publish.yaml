@@ -1,0 +1,23 @@
+build-libcloud/html/:
+  section_id: 203167038
+  articles:
+    - deploying_an_application.html
+    - getting_started.html
+
+build-shade/html/:
+  section_id: 203167038
+  articles:
+    - deploying_an_application.html
+    - getting_started.html
+
+build-fog/html/:
+  section_id: 203167038
+  articles:
+    - deploying_an_application.html
+    - getting_started.html
+
+build-jclouds/html/:
+  section_id: 203167038
+  articles:
+    - deploying_an_application.html
+    - getting_started.html
