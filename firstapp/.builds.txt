@@ -1,0 +1,4 @@
+libcloud
+shade
+jclouds
+fog
