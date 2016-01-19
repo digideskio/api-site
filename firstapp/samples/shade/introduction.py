@@ -57,7 +57,6 @@ conn.create_security_group_rule(controller_group['name'], 5672, 5672, 'TCP', rem
 
 userdata = '''#!/usr/bin/env bash
 curl -L -s http://git.openstack.org/cgit/openstack/faafo/plain/contrib/install.sh | bash -s -- \
->>>>>>> merge patches from other repo
     -i messaging -i faafo -r api
 '''
 
