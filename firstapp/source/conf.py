@@ -20,9 +20,11 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import openstackdocstheme
 import os
 import subprocess
+import sys
+import os
+import shlex
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -126,11 +128,12 @@ pygments_style = 'sphinx'
 # keep_warnings = False
 
 
+
 # -- Options for HTML output ----------------------------------------------
 
 # The theme to use for HTML and HTML Help pages. See the documentation for
 # a list of builtin themes.
-#html_theme = 'openstackdocs'
+html_theme = 'alabaster'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further. For a list of options available for each theme, see the
@@ -188,7 +191,7 @@ html_last_updated_fmt = '%Y-%m-%d %H:%M'
 # html_domain_indices = True
 
 # If false, no index is generated.
-html_use_index = False
+#html_use_index = False
 
 # If true, the index is split into individual pages for each letter.
 # html_split_index = False
@@ -309,3 +312,5 @@ pdf_documents = [
 
 # Don't generate permalinks for the titles
 html_add_permalinks = ""
+html_sidebars = {'**':[]}
+footer = False
