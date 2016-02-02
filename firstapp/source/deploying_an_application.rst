@@ -41,7 +41,6 @@ instance:
   instance. Typically, your public key is written to :code:`.ssh/id_rsa.pub`. If
   you do not have an SSH public key file, follow
   `these instructions <https://help.github.com/articles/generating-ssh- keys/>`_ first.
-  We'll cover these instructions in depth in :doc:`/introduction-to-fractal-app`.
 
 .. only:: jclouds
 
@@ -95,7 +94,6 @@ instance:
   work for our purposes. If you want, you can create another security
   group by following along below. This security group allows HTTP
   and SSH access.
-  FIXME We'll go into more detail in :doc:`/introduction-to-fractal-app`.
 
 .. only:: jclouds
 
@@ -131,7 +129,6 @@ instance:
   configure instances after they boot. The cloud-init service applies the
   user data to an instance. You must pre-install the cloud-init service on your
   chosen image.
-  FIXME We'll go into more detail in :doc:`/introduction-to-fractal-app`.
 
 .. only:: jclouds
 
@@ -208,8 +205,6 @@ instance to deploy the Fractals application.
 
 Associate a floating IP for external connectivity
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-We'll cover networking in detail in :doc:`/networking`.
 
 To see the application running, you must know where to look for it. By
 default, your instance has outbound network access. To make your instance
