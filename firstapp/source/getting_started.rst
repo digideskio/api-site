@@ -781,13 +781,6 @@ Now, you can launch the instance.
 Launch an instance
 ~~~~~~~~~~~~~~~~~~
 
-.. note:: The following instance creation example assumes that you have a
-          single-tenant network. If you receive the 'Exception: 400 Bad
-          Request Multiple possible networks found, use a Network ID to be
-          more specific' error, you have multiple-tenant networks. You
-          must add a `networks` parameter to the call that creates the
-          server. See :doc:`/appendix` for details.
-
 Now you can create the instance:
 
 .. only:: jclouds
