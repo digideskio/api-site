@@ -1,5 +1,7 @@
 #! /bin/bash -x
 
+exit 0
+
 if [ -z "$EMAIL" ] ; then
     echo '$email is not set'
     exit 1

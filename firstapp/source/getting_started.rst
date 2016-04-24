@@ -290,15 +290,18 @@ To list the images that are available in your cloud, run some API calls:
 
     .. code-block:: python
 
-        <NodeImage: id=e81771c0-2944-405c-ba92-3deb0e1b4ce3, name=CentOS-7.0, driver=OpenStack  ...>
-        <NodeImage: id=90d5e049-aaed-4abc-aa75-60c2b1ed6516, name=Ubuntu-14.04, driver=OpenStack  ...>
-        <NodeImage: id=f044ae8f-e0e1-4fb4-baff-0363c19a6638, name=CoreOS, driver=OpenStack  ...>
-        <NodeImage: id=2827d7cc-8cbb-4ce9-9b61-dadc2436144e, name=Fedora-20, driver=OpenStack  ...>
-        <NodeImage: id=42a0101d-31c1-4c09-a70d-8f75f887ee27, name=Fedora-21, driver=OpenStack  ...>
-        <NodeImage: id=683e165f-96b1-4ee5-8747-d15aade0dbff, name=CentOS-6.6, driver=OpenStack  ...>
-        <NodeImage: id=de4d521b-6630-4361-8b9a-b2fa640cdfa0, name=CentOS-6.5, driver=OpenStack  ...>
-        <NodeImage: id=5011c04a-f760-4dc5-9772-7e30d98647e6, name=Ubuntu-12.04-Precise, driver=OpenStack  ...>
-        <NodeImage: id=b4efbc2a-6130-4f2e-b436-55a618c4de20, name=Debian-7.0-Wheezy, driver=OpenStack  ...>
+        <NodeImage: id=840b74a6-500a-45f0-92fc-250a4650cb2d, name=CoreOS, driver=OpenStack  ...>
+        <NodeImage: id=a8484bc7-f6fb-45fd-9dfb-409c7c6e9bc5, name=Debian-8.3, driver=OpenStack  ...>
+        <NodeImage: id=152f56d5-f5df-4d2f-8be0-70f79122c2af, name=Debian-7.9, driver=OpenStack  ...>
+        <NodeImage: id=f53d69f6-4b15-4ef6-af70-e0c37e314c64, name=Fedora-23, driver=OpenStack  ...>
+        <NodeImage: id=12f6a911-00a2-42eb-8712-d930da2da81f, name=Ubuntu-16.04, driver=OpenStack  ...>
+        <NodeImage: id=5091963c-6132-4590-a5c5-ec720a2afe88, name=test, driver=OpenStack  ...>
+        <NodeImage: id=e0139772-0aa3-43d5-a480-ba438bb6fc8e, name=volume-testing-snap, driver=OpenStack  ...>
+        <NodeImage: id=873e4bab-ed23-4096-83fb-ee8b0dd2f5a3, name=Ubuntu-15.10, driver=OpenStack  ...>
+        <NodeImage: id=03f89ff2-d66e-49f5-ae61-656a006bbbe9, name=Ubuntu-14.04, driver=OpenStack  ...>
+        <NodeImage: id=c1e8c5b5-bea6-45e9-8202-b8e769b661a4, name=CentOS-7, driver=OpenStack  ...>
+        <NodeImage: id=10ff94ea-18dc-4790-8ac8-84e6ac9f3132, name=CentOS-6, driver=OpenStack  ...>
+
 
 .. only:: pkgcloud
 
@@ -464,14 +467,12 @@ You can also get information about available flavors using API calls:
 
     .. code-block:: python
 
-        <OpenStackNodeSize: id=100, name=subsonic, ram=1024, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=1,  ...>
-        <OpenStackNodeSize: id=200, name=supersonic, ram=2048, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=1,  ...>
-        <OpenStackNodeSize: id=300, name=lightspeed, ram=4096, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=2,  ...>
-        <OpenStackNodeSize: id=400, name=warpspeed, ram=8192, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=4,  ...>
-        <OpenStackNodeSize: id=500, name=hyperspeed, ram=16384, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=8,  ...>
-        <OpenStackNodeSize: id=600, name=ridiculous, ram=32768, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=16,  ...>
-        <OpenStackNodeSize: id=700, name=ludicrous, ram=65536, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=32,  ...>
-        <OpenStackNodeSize: id=800, name=plaid, ram=131072, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=64,  ...>
+        <OpenStackNodeSize: id=100, name=gp1.subsonic, ram=1024, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=1,  ...>
+        <OpenStackNodeSize: id=200, name=gp1.supersonic, ram=2048, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=1,  ...>
+        <OpenStackNodeSize: id=300, name=gp1.lightspeed, ram=4096, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=2,  ...>
+        <OpenStackNodeSize: id=400, name=gp1.warpspeed, ram=8192, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=4,  ...>
+        <OpenStackNodeSize: id=50, name=gp1.semisonic, ram=512, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=1,  ...>
+        <OpenStackNodeSize: id=500, name=gp1.hyperspeed, ram=16384, disk=80, bandwidth=None, price=0.0, driver=OpenStack, vcpus=8,  ...>
 
 .. only:: pkgcloud
 
