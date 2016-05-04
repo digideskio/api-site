@@ -6,7 +6,7 @@ auth_username = 'your_auth_username'
 auth_password = 'your_auth_password'
 project_name = 'your_project_name_or_id'
 
-auth_url = 'https://keystone.dream.io/'
+auth_url = 'https://iad2.dream.io:5000/v2.0'
 region_name = 'RegionOne'
 
 provider = get_driver(Provider.OPENSTACK)
