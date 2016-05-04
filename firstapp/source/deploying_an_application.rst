@@ -203,95 +203,6 @@ request the instance, wait for it to build.
 When the instance boots, the `ex_userdata` variable value instructs the
 instance to deploy the Fractals application.
 
-Associate a floating IP for external connectivity
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-To see the application running, you must know where to look for it. By
-default, your instance has outbound network access. To make your instance
-reachable from the Internet, you need an IP address. By default in some cases,
-your instance is provisioned with a publicly rout-able IP address. In this
-case, you'll see an IP address listed under `public_ips` or `private_ips` when
-you list the instances. If not, you must create and attach a floating IP
-address to your instance.
-
-.. only:: jclouds
-
-    .. literalinclude:: ../samples/jclouds/JCloudsNova.java
-        :start-after: step-13
-        :end-before: step-14
-
-    This will get an ip address that you can assign to your instance
-    with:
-
-    .. literalinclude:: ../samples/jclouds/JCloudsNova.java
-        :start-after: step-14
-        :end-before: step-15
-
-.. only:: fog
-
-    .. literalinclude:: ../samples/fog/getting_started.rb
-        :start-after: step-13
-        :end-before: step-14
-
-    This will get an ip address that you can assign to your instance
-    with:
-
-    .. literalinclude:: ../samples/fog/getting_started.rb
-        :start-after: step-14
-        :end-before: step-15
-
-.. only:: libcloud
-
-    Use :code:`ex_list_floating_ip_pools()` and select the first floating IP
-    address pool. Allocate this pool to your project and attach it to your
-    instance.
-
-    .. literalinclude:: ../samples/libcloud/getting_started.py
-        :start-after: step-13
-        :end-before: step-14
-
-    This code returns the floating IP address:
-
-    ::
-
-        <OpenStack_1_1_FloatingIpAddress: id=4536ed1e-4374-4d7f-b02c-c3be2cb09b67, ip_addr=203.0.113.101, pool=<OpenStack_1_1_FloatingIpPool: name=floating001>, driver=<libcloud.compute.drivers.openstack.OpenStack_1_1_NodeDriver object at 0x1310b50>>
-
-    You can then attach it to the instance:
-
-    .. literalinclude:: ../samples/libcloud/getting_started.py
-        :start-after: step-14
-        :end-before: step-15
-
-
-.. only:: pkgcloud
-
-    Use :code:`getFloatingIps` to check for unused addresses, selecting the
-    first one if available, otherwise use :code:`allocateNewFloatingIp` to
-    allocate a new Floating IP to your project from the default address pool.
-
-    .. literalinclude:: ../samples/pkgcloud/getting_started.js
-        :start-after: step-13
-        :end-before: step-14
-
-    This code returns the floating IP address:
-
-    ::
-
-        203.0.113.101
-
-    You can then attach it to the instance:
-
-    .. literalinclude:: ../samples/pkgcloud/getting_started.js
-        :start-after: step-14
-        :end-before: step-15
-
-.. only:: shade
-
-    .. literalinclude:: ../samples/shade/getting_started.py
-        :start-after: step-13
-        :end-before: step-14
-
-
 Run the script to start the deployment.
 
 Access the application
@@ -326,8 +237,6 @@ by using your preferred browser.
 
     .. literalinclude:: ../samples/shade/getting_started.py
         :start-after: step-15
-
-.. note:: If you do not use floating IPs, substitute another IP address as appropriate
 
 .. figure:: images/screenshot_webinterface.png
     :width: 800px
