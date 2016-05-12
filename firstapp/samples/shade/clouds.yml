@@ -4,5 +4,5 @@ clouds:
             username: $YOUR_USERNAME
             password: $YOUR_PASSWORD
             project_name: $YOUR_PROJECT
-            auth_url: https://keystone.dream.io/
+            auth_url: 'https://iad2.dream.io:5000/v2.0'
         region_name: RegionOne

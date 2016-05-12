@@ -2,7 +2,7 @@
 from shade import *
 
 simple_logging(debug=True)
-conn = openstack_cloud(cloud='myfavoriteopenstack')
+conn = openstack_cloud(cloud='dreamcompute')
 
 #step-2
 images = conn.list_images()
@@ -15,21 +15,23 @@ for flavor in flavors:
     print(flavor)
 
 #step-4
-image_id = 'c55094e9-699c-4da9-95b4-2e2e75f4c66e'
-image = conn.get_image(image_id)
+image_name = 'Ubuntu-14.04'
+image = conn.get_image(image_name)
 print(image)
 
 #step-5
-flavor_id = 'subsonic'
-flavor = conn.get_flavor(flavor_id)
+flavor_name = 'gp1.semisonic'
+flavor = conn.get_flavor(flavor_name)
 print(flavor)
 
 #step-6
 instance_name = 'testing'
 testing_instance = conn.create_server(wait=True, auto_ip=True,
     name=instance_name,
-    image=image_id,
-    flavor=flavor_id)
+    image=image['id'],
+    flavor=flavor['id'],
+    network='public'
+    )
 print(testing_instance)
 
 #step-7
@@ -38,7 +40,7 @@ for instance in instances:
     print(instance)
 
 #step-8
-conn.delete_server(name=instance_name)
+conn.delete_server(name_or_id=instance_name)
 
 #step-9
 print('Checking for existing SSH keypair...')
@@ -78,17 +80,13 @@ curl -L -s https://git.openstack.org/cgit/openstack/faafo/plain/contrib/install.
 instance_name = 'all-in-one'
 testing_instance = conn.create_server(wait=True, auto_ip=False,
     name=instance_name,
-    image=image_id,
-    flavor=flavor_id,
+    image=image['id'],
+    flavor=flavor['id'],
     key_name=keypair_name,
     security_groups=[sec_group_name],
-    userdata=ex_userdata)
+    userdata=ex_userdata,
+    network='public')
 
-#step-13
-f_ip = conn.available_floating_ip()
-
-#step-14
-conn.add_ip_list(testing_instance, [f_ip['floating_ip_address']])
-
+ip_address = testing_instance['addresses']['public'][0]['addr']
 #step-15
-print('The Fractals app will be deployed to http://%s' % f_ip['floating_ip_address'] )
+print('The Fractals app will be deployed to http://%s' % ip_address )
