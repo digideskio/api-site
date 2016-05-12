@@ -346,7 +346,6 @@ To list the images that are available in your cloud, run some API calls:
 .. only:: shade
 
     .. literalinclude:: ../samples/shade/getting_started.py
-        :language: python
         :start-after: step-2
         :end-before: step-3
 
@@ -520,7 +519,6 @@ You can also get information about available flavors using API calls:
 .. only:: shade
 
     .. literalinclude:: ../samples/shade/getting_started.py
-        :language: python
         :start-after: step-3
         :end-before: step-4
 
@@ -650,7 +648,7 @@ image that you picked in the previous section:
         id: c55094e9-699c-4da9-95b4-2e2e75f4c66e
         min_disk: 0
         min_ram: 0
-        name: Ubuntu-14.04-Trusty
+        name: Ubuntu-14.04
         owner: 0bacd8121bb548698f340455b38bf561
         protected: false
         schema: /v2/schemas/image
