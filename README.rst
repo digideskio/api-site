@@ -165,3 +165,9 @@ Install
 =======
 
 To learn more about the OpenStack project, see `OpenStack <http://www.openstack.org/>`_.
+
+Other Notes
+===========
+
+Check https://github.com/dreamhost/dreamcloud-docs/blob/master/README.md for
+more information on contributing to this
